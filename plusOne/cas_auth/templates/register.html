@@ -1,9 +1,26 @@
-{% extends 'base.html' %}
-
-{% block body %}
-<h1> register </h1>
-<form method="POST"> {% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn-primary"> SUBMIT </button>
-</form>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'action/style.css' %}">
+</head>
+<body>
+    <div class="container-fluid main-bg centered">
+        <div class="container reg-header text-left"> First time? </div>
+        <div class="container card home-card p-5 shadow-lg">
+            <form id="reg" method="POST"> {% csrf_token %}
+                <label class="ml-1"> {{ form.first_name.label }} </label>
+                {{ form.first_name }}
+                <label class="ml-1"> {{ form.last_name.label }} </label>
+                {{ form.last_name }}
+                <div class="contact-hint">(Mobile/Facebook/E-Mail, anything.)</div>
+                <button type="submit" class="btn btn-outline-warning outline-btn p-2 px-4 mt-4"> SUBMIT </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
