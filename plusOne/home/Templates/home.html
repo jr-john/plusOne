@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h2>Hello, {{user.first_name}}</h2><br>
+{% endif %}
+
+<form action="NewTrip" method="POST">
+
+    {% csrf_token %}
+    <input type="button" value="New Trip">
+
+</form>
+
+{% if user.is_authenticated %}
+
+    <h3>ACTIVITY</h3>
+
+{% endif %}
+
+{% endblock %}
