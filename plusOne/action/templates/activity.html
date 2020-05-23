@@ -6,7 +6,9 @@
         <h4>source:</h4><p>{{ feed.source }}</p><br>
         <h4>destination:</h4><p>{{ feed.destination }}</p><br>
         <h4>date and time:</h4><p>{{ feed.journey_datetime }}</p><br>
+        <form action="stop">
         <input type="button" value="stop accepting requests">
+        </form>
         <br><br>
     </div>
     {% endfor %}

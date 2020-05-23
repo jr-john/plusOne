@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Trip
 from .forms import TripForm
 # Create your views here.
@@ -24,3 +24,11 @@ def activity(request, *args, **kwargs):
             req.append(list)
     context = {'feeds' : req}
     return render(request, "activity.html", context)
+
+def stop(request, *args, **kwargs):
+    trips = Trip.objects.all()
+    for trip in trips:
+        if trip.owner == request.user.username:
+            trip.is_active = False
+            break
+    return redirect("MyActivity")
