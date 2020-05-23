@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-def NewTrip(request):
+def newTrip(request, *args, **kwargs):
     return render(request, 'entry.html')
 
-def home(request):
+def home(request, *args, **kwargs):
     return render(request, "home.html")
