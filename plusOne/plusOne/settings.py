@@ -119,7 +119,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # CAS_SERVER_URL = "https://login.iiit.ac.in/cas/"
 
