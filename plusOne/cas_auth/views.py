@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from .forms import UserForm
 
 
-@login_required
+# @login_required
 def register_user(request):
-    if request.user.first_name:
-        return redirect('/')
+    # if request.user.first_name:
+    #    return redirect('/')
     form = UserForm(request.POST or None, instance = request.user)
     if request.method == 'POST':
         form.save()
