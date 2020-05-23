@@ -1,22 +1,21 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+<nav class="navbar navbar-expand-md navbar-dark navbar-black fixed-top bg-dark">
+    <span class="po-icon"> +1 </span>
+    <div class="ml-auto btn-container">
+        <form class="form-inline my-2">
+            <button class="btn btn-outline-success outline-btn nav-btn mx-2" type="submit"> MY TRIPS </button>
+        </form>
+        <form class="form-inline my-2">
+            <button class="btn btn-outline-primary outline-btn nav-btn mx-2" type="submit"> LOG OUT </button>
+        </form>
+    </div>
+</nav>
+
+{% endblock %}
+
 {% block body %}
-
-{% if user.is_authenticated %}
-<h2>Hello, {{user.first_name}}</h2><br>
-{% endif %}
-
-<form action="NewTrip" method="POST">
-
-    {% csrf_token %}
-    <input type="button" value="New Trip">
-
-</form>
-
-{% if user.is_authenticated %}
-
-    <h3>ACTIVITY</h3>
-
-{% endif %}
 
 {% endblock %}

@@ -1,0 +1,40 @@
+* {
+    font-family: 'Jost';
+}
+
+body {
+    background-color: black;
+}
+
+.main-bg {
+    height: 100vh;
+    background-image: url('/static/action/hyd_zoom.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: black;
+    opacity: 0.75;
+}
+
+.navbar-black {
+    background-color: #00000000 !important;
+}
+
+.nav-btn {
+    font-weight: 500;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.outline-btn {
+    border-width: 2px !important;
+}
+
+.po-icon {
+    font-weight: 600;
+    font-size: 28px;
+    color: white;
+}
