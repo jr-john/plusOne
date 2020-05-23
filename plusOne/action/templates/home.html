@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
 <nav class="navbar navbar-expand-md navbar-dark navbar-black fixed-top bg-dark">
     <span class="po-icon"> +1 </span>
     <div class="ml-auto btn-container">
@@ -13,9 +12,21 @@
         </form>
     </div>
 </nav>
-
 {% endblock %}
 
 {% block body %}
-
+<div class="container card home-card p-5 shadow-lg">
+    <form id="trip" method="POST"> {% csrf_token %}
+        <label class="ml-1"> {{ form.destination.label }} </label>
+        {{ form.destination }}
+        <label class="ml-1"> {{ form.source.label }} </label>
+        {{ form.source }}
+        <label class="ml-1"> {{ form.journey_date.label }} </label>
+        <div class="form-row">
+            <div class="col"> {{ form.journey_date }} </div>
+            <div class="col"> {{ form.journey_time }} </div>
+        </div>
+        <button class="btn btn-outline-danger outline-btn p-2 px-4 mt-4" type="submit"> GO! </button>
+    </form>
+</div>
 {% endblock %}

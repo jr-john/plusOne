@@ -6,6 +6,12 @@ body {
     background-color: black;
 }
 
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .main-bg {
     height: 100vh;
     background-image: url('/static/action/hyd_zoom.png');
@@ -13,7 +19,6 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-color: black;
-    opacity: 0.75;
 }
 
 .navbar-black {
@@ -37,4 +42,25 @@ body {
     font-weight: 600;
     font-size: 28px;
     color: white;
+}
+
+.home-card {
+    max-width: 500px;
+    background-color: #161616 !important;
+}
+
+#trip label {
+    color: #b3b3b3;
+    font-weight: 500;
+}
+
+#trip input {
+    background-color: #000000;
+    border-color: black !important;
+    color: #eee;
+    font-size: 24px;
+}
+
+.dt-gray {
+    color: #888 !important;
 }
