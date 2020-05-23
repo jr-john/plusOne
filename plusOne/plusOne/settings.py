@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home',
     'action'
 ]
 
@@ -56,7 +55,7 @@ ROOT_URLCONF = 'plusOne.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates"), os.path.join(BASE_DIR, "action/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
