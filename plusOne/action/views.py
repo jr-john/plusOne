@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Trip
 from .forms import TripForm
 
 
+@login_required
 def home(request, *args, **kwargs):
+    if not request.user.first_name:
+        return redirect('/register/')
+    
     form = TripForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -14,6 +19,8 @@ def home(request, *args, **kwargs):
     }
     return render(request, "home.html", context)
 
+
+@login_required
 def activity(request, *args, **kwargs):
     trips = []
     req = []
@@ -27,6 +34,8 @@ def activity(request, *args, **kwargs):
     }
     return render(request, "activity.html", context)
 
+
+@login_required
 def stop(request, *args, **kwargs):
     trips = Trip.objects.all()
     for trip in trips:

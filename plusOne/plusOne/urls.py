@@ -21,6 +21,7 @@ import cas.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('action.urls')),
-    path('auth/login/', cas.views.login),
-    path('auth/logout/', cas.views.logout)
+    path('', include('cas_auth.urls')),
+    path('accounts/login/', cas.views.login),
+    path('accounts/logout/', cas.views.logout),
 ]
