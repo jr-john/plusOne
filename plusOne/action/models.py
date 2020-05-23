@@ -6,4 +6,4 @@ class Trip(models.Model):
     destination = models.CharField(max_length = 100)
     journey_datetime = models.DateTimeField(default = datetime.now)
     is_active = models.BooleanField(default = False)
-    owner = models.CharField(max_length = 100)
+    owner = models.CharField(max_length = 100, null=True, blank=True)
