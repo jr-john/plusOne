@@ -4,10 +4,10 @@ from .models import Trip
 from .forms import TripForm
 
 
-@login_required
+# @login_required
 def home(request, *args, **kwargs):
-    if not request.user.first_name:
-        return redirect('/register/')
+    # if not request.user.first_name:
+    #     return redirect('/register/')
     
     form = TripForm(request.POST or None)
     if form.is_valid():
@@ -20,7 +20,7 @@ def home(request, *args, **kwargs):
     return render(request, "home.html", context)
 
 
-@login_required
+# @login_required
 def activity(request, *args, **kwargs):
     trips = []
     req = []
@@ -35,7 +35,7 @@ def activity(request, *args, **kwargs):
     return render(request, "activity.html", context)
 
 
-@login_required
+# @login_required
 def stop(request, *args, **kwargs):
     trips = Trip.objects.all()
     for trip in trips:

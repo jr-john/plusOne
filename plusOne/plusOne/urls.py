@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import cas.views
+# import cas.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('action.urls')),
-    path('', include('cas_auth.urls')),
-    path('accounts/login/', cas.views.login),
-    path('accounts/logout/', cas.views.logout),
+    # path('', include('cas_auth.urls')),
+    # path('accounts/login/', cas.views.login),
+    # path('accounts/logout/', cas.views.logout),
 ]
