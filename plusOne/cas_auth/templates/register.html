@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'action/style.css' %}">
 </head>
-<body>
-    <div class="container-fluid main-bg centered">
+<body class="main-bg">
+    <div class="container-fluid mt-5 centered">
         <div class="container reg-header text-left"> First time? </div>
         <div class="container card home-card p-5 shadow-lg">
             <form id="reg" method="POST"> {% csrf_token %}

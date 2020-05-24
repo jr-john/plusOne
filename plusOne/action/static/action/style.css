@@ -46,6 +46,12 @@ body {
     color: white;
 }
 
+a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+
 .home-card {
     max-width: 500px;
     background-color: #161616 !important;
