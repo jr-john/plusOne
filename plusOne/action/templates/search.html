@@ -8,10 +8,6 @@
             <p>{{ object.is_active }}<br>{{ object.owner }}<br></p>
         {% endfor %}
 </div>
-'<div class="tweet">
-    <h3>{{author}}</h3>
-    <p>{{ message }}</p>
-</div>
 <div class="col-md-9 col-md-pull-3">
     {% for object in object_list %}
         <section class="search-result-item">
@@ -29,10 +25,8 @@
             </div>
         </section>
     {% endfor %}
-<<<<<<< HEAD
     <form action="add/">
         <input type="submit" value="Add new Trip">
     </form>
-=======
->>>>>>> 62891b4ef9cf9cf4c58d926386a23ba77c639d55
+</div>
 {% endblock %}
