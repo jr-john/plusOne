@@ -4,7 +4,7 @@ from .models import Trip
 from .forms import TripForm
 import datetime
 import json
-
+from django.contrib.auth.models import User
 
 # @login_required
 def home(request, *args, **kwargs):
@@ -80,3 +80,15 @@ def add(request, *args, **kwargs):
     search_query.owner = request.user.username
     search_query.save()
     return redirect("/")
+
+
+def tripdetails(request):
+    id = request.GET['id']
+    temp = Trip.objects.query(id = id)
+    var=temp.owner
+    curr_owner = User.objects.query(username=var)
+    context={
+        'temp' : temp,
+        'curr_owner' : curr_owner
+    }
+    return render(request, 'tripdetails.html', context)

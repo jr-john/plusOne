@@ -13,7 +13,9 @@
                         <p class="info">{{ object.journey_date }}, {{ object.journey_time }}</p>
                     </div>
                     <div class="col-sm-3 text-align-center">
-                    <a class="btn btn-primary btn-info btn-sm" href="#">+1</a>
+                    <form action="tripdetails" method="POST">{% csrf_token %}
+                        <input type="submit" value="+1">
+                    </form>
                     </div>
                 </div>
             </div>
