@@ -1,12 +1,32 @@
 {% extends "base.html" %}
 {% block body %}
 
-<div style="color:azure">
-    <p>{{ params.source }}<br>{{ params.destination }}<br>{{ params.journey_time }}<br></p>
+<div class="searchresult">
         {% for object in object_list %}
             <p>{{ object.source }}<br>{{ object.destination }}<br></p>
             <p>{{ object.journey_date }}<br>{{ object.journey_time }}<br></p>
             <p>{{ object.is_active }}<br>{{ object.owner }}<br></p>
         {% endfor %}
 </div>
+'<div class="tweet">
+    <h3>{{author}}</h3>
+    <p>{{ message }}</p>
+</div>
+<div class="col-md-9 col-md-pull-3">
+    {% for object in object_list %}
+        <section class="search-result-item">
+            <div class="search-result-item-body">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="search-result-item-heading">From: {{ object.source }}</h4>
+                        <h4 class="search-result-item-heading">To: {{ object.destination }}</h4>
+                        <h5 class="search-result-item-metaheading">{{ object.owner }}</h5>
+                        <p class="info">{{ object.journey_date }}, {{ object.journey_time }}</p>
+                    <div class="col-sm-3 text-align-center">
+                    <a class="btn btn-primary btn-info btn-sm" href="#">+1</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
 {% endblock %}
