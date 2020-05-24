@@ -10,7 +10,9 @@
     {% block head %} {% endblock %}
 </head>
 <nav class="navbar navbar-expand-md navbar-dark navbar-black fixed-top bg-dark">
+    <a href="/">
     <img class="po-icon" src="{% static 'action/po_logo.png'%}">
+    </a>
     <div class="ml-auto btn-container">
         {% if not hidemy %}
         <form class="form-inline my-2" action="/activity/">
