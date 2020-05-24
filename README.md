@@ -1,6 +1,6 @@
 # plusOne
 
-**~ *Heckermen***  
+**~*Heckermen***  
 *A IIIT Cab Sharing System*
 
 ## Introduction
