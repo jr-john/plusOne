@@ -5,23 +5,23 @@
 {% endblock %}
 
 {% block body %}
-
-    <div class="container mb-5">
-    {% for trip in trips %}
-        <div class="container search-result-item card home-card p-5 mt-5 shadow-lg">
-            <div class="search-result-item-heading-label pt-3"> TO </div>
-            <h4 class="search-result-item-heading">{{ trip.destination }}</h4>
-            <div class="search-result-item-heading-label pt-3"> FROM </div>
-            <h4 class="search-result-item-heading">{{ trip.source }}</h4>
-            <p class="info pt-3">{{ trip.journey_date }}, {{ trip.journey_time }}</p>
-            <br><br>
-            {% if trip.is_active %}
-            <form action="stop/{{ trip.id }}">
-                <button class="btn btn-outline-danger outline-btn" type="submit"> Stop accepting requests </button>
-            </form>
-            {% endif %}
-        </div>
-    {% endfor %}
+<div class="container reg-header fin-h text-left pt-5"> Upcoming trips </div>
+<div class="container mb-5">
+{% for trip in trips %}
+    <div class="container search-result-item card home-card p-5 mt-5 shadow-lg">
+        <div class="search-result-item-heading-label pt-3"> TO </div>
+        <h4 class="search-result-item-heading">{{ trip.destination }}</h4>
+        <div class="search-result-item-heading-label pt-3"> FROM </div>
+        <h4 class="search-result-item-heading">{{ trip.source }}</h4>
+        <p class="info pt-3">{{ trip.journey_date }}, {{ trip.journey_time }}</p>
+        <br><br>
+        {% if trip.is_active %}
+        <form action="stop/{{ trip.id }}">
+            <button class="btn btn-outline-danger outline-btn" type="submit"> Stop accepting requests </button>
+        </form>
+        {% endif %}
     </div>
+{% endfor %}
+</div>
 
 {% endblock %}

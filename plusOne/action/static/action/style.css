@@ -62,6 +62,14 @@ body {
     font-size: 56px;
 }
 
+.fin-h {
+    margin-bottom: -20px;
+}
+
+.pre-h {
+    margin-bottom: 20px;
+}
+
 .contact-hint {
     color: #555;
     margin-top: -10px;

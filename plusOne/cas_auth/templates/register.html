@@ -11,7 +11,7 @@
 </head>
 <body class="main-bg">
     <div class="container-fluid mt-5 centered">
-        <div class="container reg-header text-left"> First time? </div>
+        <div class="container reg-header pre-h pt-5 text-left"> First time? </div>
         <div class="container card home-card p-5 shadow-lg">
             <form id="reg" method="POST"> {% csrf_token %}
                 <label class="ml-1"> {{ form.first_name.label }} </label>
