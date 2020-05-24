@@ -7,11 +7,11 @@
             <div class="search-result-item-body">
                 <div class="row">
                     <div class="col-sm-9">
-                        <h4 class="search-result-item-heading">From: {{ temp.source }}</h4>
-                        <h4 class="search-result-item-heading">To: {{ temp.destination }}</h4>
-                        <h5 class="search-result-item-metaheading">{{ temp.owner }}</h5>
-                        <p class="info">{{ temp.journey_date }}, {{ temp.journey_time }}</p>
-                        <h5 class="search-result-item-metaheading">Contact info : {{ curr_owner.last_name }}</h5>
+                        <h4 class="search-result-item-heading">To: {{ trip.destination }}</h4>
+                        <h4 class="search-result-item-heading">From: {{ trip.source }}</h4>
+                        <p class="info">{{ trip.journey_date }}, {{ trip.journey_time }}</p>
+                        <h5 class="search-result-item-metaheading">{{ owner.first_name }}</h5>
+                        <h5 class="search-result-item-metaheading">Contact info : {{ owner.last_name }}</h5>
                     </div>
                 </div>
             </div>

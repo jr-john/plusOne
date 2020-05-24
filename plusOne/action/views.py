@@ -6,6 +6,7 @@ import datetime
 import json
 from django.contrib.auth.models import User
 
+
 # @login_required
 def home(request, *args, **kwargs):
     # if not request.user.first_name:
@@ -58,9 +59,10 @@ def search(request, *args, **kwargs):
         destination=destination_query,
         journey_time__gte= dt_query - datetime.timedelta(hours=1.5),
         journey_time__lte= dt_query + datetime.timedelta(minutes=30),
-        is_active=True).exclude(owner=request.user.username)
+        is_active=True)
     object_list = [
         {
+            "id" : trip.id,
             "source" : trip.source,
             "destination" : trip.destination,
             "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
@@ -82,13 +84,12 @@ def add(request, *args, **kwargs):
     return redirect("/")
 
 
-def tripdetails(request):
-    id = request.GET['id']
-    temp = Trip.objects.query(id = id)
-    var=temp.owner
-    curr_owner = User.objects.query(username=var)
-    context={
-        'temp' : temp,
-        'curr_owner' : curr_owner
+def tripdetails(request, id):
+    trip = Trip.objects.get(id = id)
+    owner = User.objects.get(username = trip.owner)
+
+    context = {
+        'owner': owner,
+        'trip': trip
     }
     return render(request, 'tripdetails.html', context)

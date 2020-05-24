@@ -7,5 +7,5 @@ urlpatterns = [
     path("search/", search, name="search"),
     path("search/add/", add, name="add"),
     path("activity/stop/", stop, name="stop"),
-    path("search/tripdetails/", tripdetails, name="tripdetails")
+    path("search/trip/<int:id>", tripdetails, name="tripdetails")
 ]
