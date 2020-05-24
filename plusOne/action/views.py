@@ -64,7 +64,7 @@ def search(request, *args, **kwargs):
             "source" : trip.source,
             "destination" : trip.destination,
             "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
-            "journey_time" : trip.journey_time.strftime("%H%M"),
+            "journey_time" : trip.journey_time.strftime("%H:%M"),
             "is_active" : True,
             "owner" : trip.owner,
         }
