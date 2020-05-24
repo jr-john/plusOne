@@ -23,7 +23,9 @@
                         <p class="info">{{ object.journey_date }}, {{ object.journey_time }}</p>
                     </div>
                     <div class="col text-right">
-                        <btn class="btn btn-outline-danger outline-btn btn-md" >+1</btn>
+                        <form action="tripdetails/" method="POST"> {% csrf_token %}
+                            <btn class="btn btn-outline-danger outline-btn btn-md" >+1</btn>
+                        </form>
                     </div>
                 </div>
         </section>
