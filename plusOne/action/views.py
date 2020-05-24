@@ -88,6 +88,7 @@ def search(request, *args, **kwargs):
             "owner" : trip.owner,
         }
         for trip in trips
+        if datetime.datetime.combine(trip.journey_date, trip.journey_time) >= datetime.datetime.now()
     ]
     context = {"object_list":object_list}
     return render(request, "search.html", context)
