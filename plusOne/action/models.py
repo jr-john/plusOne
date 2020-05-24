@@ -5,7 +5,7 @@ def def_time():
     return timezone.now().strftime("%H:%M")
 
 TAG_LIST = [
-    ['airport', 'Rajiv Gandhi Intenational Airport'],
+    ['airport', 'Rajiv Gandhi International Airport'],
     ['railway-secunderabad', 'Secunderabad Railway Station'],
     ['railway-lingam', 'Lingampally Railway Station'],
     ['railway-begumpet', 'Begumpet Railway Station'],

@@ -6,6 +6,15 @@ import datetime
 import json
 from django.contrib.auth.models import User
 
+TAG_DICT = {
+    'airport': 'Rajiv Gandhi International Airport',
+    'railway-secunderabad': 'Secunderabad Railway Station',
+    'railway-lingam': 'Lingampally Railway Station',
+    'railway-begumpet': 'Begumpet Railway Station',
+    'railway-nampally': 'Hyderabad Deccan Railway Station (Nampally)',
+    'bus-mg': 'Mahatma Gandhi Bus Station',
+    'college':'IIIT Hyderabad Campus'
+}
 
 # @login_required
 def home(request, *args, **kwargs):
@@ -64,8 +73,8 @@ def search(request, *args, **kwargs):
     object_list = [
         {
             "id" : trip.id,
-            "source" : trip.source,
-            "destination" : trip.destination,
+            "source" : TAG_DICT[trip.source],
+            "destination" : TAG_DICT[trip.destination],
             "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
             "journey_time" : trip.journey_time.strftime("%H:%M"),
             "is_active" : True,
