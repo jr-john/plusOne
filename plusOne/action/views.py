@@ -58,7 +58,7 @@ def search(request, *args, **kwargs):
         destination=destination_query,
         journey_time__gte= dt_query - datetime.timedelta(hours=1.5),
         journey_time__lte= dt_query + datetime.timedelta(minutes=30),
-        is_active=True)
+        is_active=True).exclude(owner=request.user.username)
     object_list = [
         {
             "source" : trip.source,
@@ -77,5 +77,6 @@ def search(request, *args, **kwargs):
 def add(request, *args, **kwargs):
     search_query = Trip.objects.latest("id")
     search_query.is_active = True
+    search_query.owner = request.user.username
     search_query.save()
     return redirect("/")
