@@ -106,7 +106,11 @@ def tripdetails(request, id):
     owner = User.objects.get(username = trip.owner)
 
     context = {
-        'owner': owner,
-        'trip': trip
+        "owner_name": owner.first_name,
+        "owner_contact": owner.last_name,
+        "source" : TAG_DICT[trip.source],
+        "destination" : TAG_DICT[trip.destination],
+        "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
+        "journey_time" : trip.journey_time.strftime("%H:%M"),
     }
     return render(request, 'tripdetails.html', context)

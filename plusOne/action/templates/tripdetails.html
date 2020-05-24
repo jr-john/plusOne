@@ -1,18 +1,24 @@
 {% extends "base.html" %}
 {% block body %}
 
-<section class="search-result-item home-card shadow-lg">
-    
-            <div class="search-result-item-body">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <h4 class="search-result-item-heading">To: {{ trip.destination }}</h4>
-                        <h4 class="search-result-item-heading">From: {{ trip.source }}</h4>
-                        <p class="info">{{ trip.journey_date }}, {{ trip.journey_time }}</p>
-                        <h5 class="search-result-item-metaheading">{{ owner.first_name }}</h5>
-                        <h5 class="search-result-item-metaheading">Contact info : {{ owner.last_name }}</h5>
-                    </div>
-                </div>
-            </div>
-</section>
+<div class="container search-result-item card home-card p-5 mt-5 shadow-lg">
+    <div class="search-result-item-heading-label"> CONTACT </div>
+    <h2 class="search-result-item-heading">{{ owner_name }}</h2>
+    <h2 class="search-result-item-heading">{{ owner_contact }}</h2>
+    <br/><br/>
+    <div class="search-result-item-heading-label pt-3"> TO </div>
+    <h4 class="search-result-item-heading">{{ destination }}</h4>
+    <div class="search-result-item-heading-label pt-3"> FROM </div>
+    <h4 class="search-result-item-heading">{{ source }}</h4><br/>
+    <h2 class="search-result-item-heading-label">{{ journey_date }}, {{ journey_time }}</h2>
+    <div class="pt-5">
+        <button onclick="goBack()" class="btn btn-outline-warning outline-btn"> < RETURN TO SEARCH </button>
+    </div> 
+</div>
+
+<script>
+    function goBack() {
+      window.history.back();
+    }
+</script>
 {% endblock %}
