@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Trip
 from .forms import TripForm
+import datetime
+import json
 
 
 # @login_required
@@ -12,8 +14,7 @@ def home(request, *args, **kwargs):
     form = TripForm(request.POST or None)
     if form.is_valid():
         form.save()
-        form = TripForm()
-
+        return redirect("search/")
     context = {
         "form" : form
     }
@@ -42,4 +43,39 @@ def stop(request, *args, **kwargs):
         if trip.owner == request.user.username:
             trip.is_active = False
             break
-    return redirect("MyActivity")
+    return redirect("activity/")
+
+# @login_required
+def search(request, *args, **kwargs):
+    search_query = Trip.objects.latest("id")
+    source_query = search_query.source
+    destination_query = search_query.destination
+    date_query = search_query.journey_date
+    time_query = search_query.journey_time
+    dt_query = datetime.datetime.combine(date_query, time_query)
+    trips = Trip.objects.filter(
+        source=source_query,
+        destination=destination_query,
+        journey_time__gte= dt_query - datetime.timedelta(hours=1.5),
+        journey_time__lte= dt_query + datetime.timedelta(minutes=30),
+        is_active=True)
+    object_list = json.dumps([
+        {
+            "source" : trip.source,
+            "destination" : trip.destination,
+            "journey_date" : trip.journey_date,
+            "journey_time" : trip.journey_time,
+            "is_active" : True,
+            "owner" : trip.owner,
+        }
+        for trip in trips
+    ], default=str)
+    params = json.dumps({
+        "source" : source_query,
+        "destination" : destination_query,
+        "journey_date" : date_query,
+        "journey_time" : time_query}, default=str)
+    # print("params",params)
+    # print("list",object_list)
+    context = {"params":params, "object_list":object_list}
+    return render(request, "search.html", context)
