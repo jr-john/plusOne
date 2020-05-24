@@ -6,6 +6,7 @@
 
 {% block body %}
 <div class="container card home-card p-5 mt-5 shadow-lg" action="search/">
+    {{ form.errors }}
     <form id="trip" method="POST"> {% csrf_token %}
         <label class="ml-1"> {{ form.destination.label }} </label>
         {{ form.destination }}
