@@ -32,7 +32,8 @@ def activity(request, *args, **kwargs):
             req.append(trip)
 
     context = {
-        'feeds' : req
+        'feeds' : req,
+        'hidemy': True
     }
     return render(request, "activity.html", context)
 
