@@ -6,4 +6,8 @@
         <p>{{ object.journey_date }}<br>{{ object.journey_time }}<br></p>
         <p>{{ object.is_active }}<br>{{ object.owner }}<br></p>
     {% endfor %}
+
+    <form action="add/">
+        <input type="submit" value="Add new trip">
+    </form>
 {% endblock %}

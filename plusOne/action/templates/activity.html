@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 {% block head %}<title>MY ACTIVITY</title>{% endblock %}
 {% block body %}
+
+<h3>UPCOMING_TRIPS</h3><br>
+
     {% for feed in feeds %}
+    
     <div>
         <h4>source:</h4><p>{{ feed.source }}</p><br>
         <h4>destination:</h4><p>{{ feed.destination }}</p><br>
         <h4>date and time:</h4><p>{{ feed.journey_datetime }}</p><br>
-        <form action="stop">
-        <input type="button" value="stop accepting requests">
-        </form>
         <br><br>
     </div>
     {% endfor %}
+    <form action="stop/">
+        <input type="submit" value="stop accepting requests">
+    </form>
 {% endblock %}
