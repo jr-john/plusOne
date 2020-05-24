@@ -37,6 +37,7 @@ body {
 
 .outline-btn {
     border-width: 2px !important;
+    font-weight: 500;
 }
 
 .po-icon {
@@ -105,7 +106,8 @@ body {
 .search-result-item {
     padding: 20px;
     background-color: #fff;
-    border-radius: 4px
+    border-radius: 4px;
+    max-width: 500px;
 }
 
 .search-result-item:after,
@@ -127,30 +129,21 @@ body {
     font-size: 13px
 }
 
-.search-result-item+.search-result-item {
-    margin-top: 20px
-}
-
-@media (min-width:768px) {
-    .search-result-item-body {
-        margin-left: 200px
-    }
-}
-
 .search-result-item-metaheading {
-    font-weight: 300
+    font-weight: 300;
+    color: #EEE;
+}
+
+.search-result-item-heading-label {
+    font-weight: 500;
+    color: #555;
 }
 
 .search-result-item-heading {
-    font-weight: 400
+    font-weight: 400;
+    color: #EEE;
 }
 
 .search-result-item-heading>a {
-    color: #555
-}
-
-@media (min-width:768px) {
-    .search-result-item-heading {
-        margin: 0
-    }
+    color: #eee;
 }

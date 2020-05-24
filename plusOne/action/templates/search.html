@@ -1,26 +1,41 @@
 {% extends "base.html" %}
 {% block body %}
 
-<div class="col-md-9 col-md-pull-3">
-    {% for object in object_list %}
-        <section class="search-result-item">
-            <div class="search-result-item-body">
+<div class="container overflow-hidden pt-5">
+    <div class="container overflow-auto centered">
+
+        {% for object in object_list %}
+            {% if forloop.counter0|divisibleby:3 %}
+                {% if forloop.counter0 != 0 %}
+                    </div>
+                {% endif %}
+                <div class="row py-2">
+            {% endif %}
+        <div class="col m-2">
+        <section class="search-result-item home-card shadow-lg">
                 <div class="row">
-                    <div class="col-sm-9">
-                        <h4 class="search-result-item-heading">From: {{ object.source }}</h4>
-                        <h4 class="search-result-item-heading">To: {{ object.destination }}</h4>
-                        <h5 class="search-result-item-metaheading">{{ object.owner }}</h5>
+                    <div class="col">
+                        <h5 class="search-result-item-metaheading">{{ object.owner|upper }}</h5>
+                        <div class="search-result-item-heading-label"> TO </div>
+                        <h4 class="search-result-item-heading">{{ object.destination }}</h4>
+                        <div class="search-result-item-heading-label"> FROM </div>
+                        <h4 class="search-result-item-heading">{{ object.source }}</h4>
                         <p class="info">{{ object.journey_date }}, {{ object.journey_time }}</p>
                     </div>
-                    <div class="col-sm-3 text-align-center">
-                    <a class="btn btn-primary btn-info btn-sm" href="#">+1</a>
+                    <div class="col text-right">
+                        <btn class="btn btn-outline-danger outline-btn btn-md" >+1</btn>
                     </div>
                 </div>
-            </div>
         </section>
-    {% endfor %}
-    <form action="add/">
-        <input type="submit" value="Add new Trip">
-    </form>
+        </div>
+        {% endfor %}
+        </div>
+
+    </div>
+    <div class="centered">
+        <form action="add/">
+            <button type="submit" class="btn btn-outline-info outline-btn mt-5 mb-5"> MAKE A NEW TRIP </button>
+        </form>
+    </div>
 </div>
 {% endblock %}
