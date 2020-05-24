@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
-    <p>{{ params.source }}<br>{{ params.destination }}<br>{{ params.journey_time }}<br></p>
-    {% for object in object_list %}
-        <p>{{ object.source }}<br>{{ object.destination }}<br></p>
-        <p>{{ object.journey_date }}<br>{{ object.journey_time }}<br></p>
-        <p>{{ object.is_active }}<br>{{ object.owner }}<br></p>
-    {% endfor %}
 
-    <form action="add/">
-        <input type="submit" value="Add new trip">
-    </form>
+<div style="color:azure">
+    <p>{{ params.source }}<br>{{ params.destination }}<br>{{ params.journey_time }}<br></p>
+        {% for object in object_list %}
+            <p>{{ object.source }}<br>{{ object.destination }}<br></p>
+            <p>{{ object.journey_date }}<br>{{ object.journey_time }}<br></p>
+            <p>{{ object.is_active }}<br>{{ object.owner }}<br></p>
+        {% endfor %}
+</div>
 {% endblock %}

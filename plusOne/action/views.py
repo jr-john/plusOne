@@ -58,25 +58,18 @@ def search(request, *args, **kwargs):
         journey_time__gte= dt_query - datetime.timedelta(hours=1.5),
         journey_time__lte= dt_query + datetime.timedelta(minutes=30),
         is_active=True)
-    object_list = json.dumps([
+    object_list = [
         {
             "source" : trip.source,
             "destination" : trip.destination,
-            "journey_date" : trip.journey_date,
-            "journey_time" : trip.journey_time,
+            "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
+            "journey_time" : trip.journey_time.strftime("%H%M"),
             "is_active" : True,
             "owner" : trip.owner,
         }
         for trip in trips
-    ], default=str)
-    params = json.dumps({
-        "source" : source_query,
-        "destination" : destination_query,
-        "journey_date" : date_query,
-        "journey_time" : time_query}, default=str)
-    # print("params",params)
-    # print("list",object_list)
-    context = {"params":params, "object_list":object_list}
+    ]
+    context = {"object_list":object_list}
     return render(request, "search.html", context)
 
 
