@@ -15,8 +15,8 @@ TAG_LIST = [
 ]
 
 class Trip(models.Model):
-    source = models.CharField(max_length = 100, choices = TAG_LIST, default = 'other')
-    destination = models.CharField(max_length = 100, choices = TAG_LIST, default = 'other')
+    source = models.CharField(max_length = 100, choices = TAG_LIST, default = 'college')
+    destination = models.CharField(max_length = 100, choices = TAG_LIST, default = 'airport')
     journey_date = models.DateField(default = timezone.now)
     journey_time = models.TimeField(default = def_time)
     is_active = models.BooleanField(default = False)

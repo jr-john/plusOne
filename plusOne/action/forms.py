@@ -17,8 +17,8 @@ class TripForm(forms.ModelForm):
             "journey_time": " "
         }
         widgets = {
-            "source": forms.Select(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'}),
-            "destination": forms.Select(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'}),
+            "source": forms.Select(attrs = {'class': 'form-dd py-3 pl-2 mb-4', 'autocomplete': 'off'}),
+            "destination": forms.Select(attrs = {'class': 'form-dd py-3 pl-2 mb-4', 'autocomplete': 'off'}),
             "journey_date": forms.DateInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
             "journey_time": forms.TimeInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'})
         }

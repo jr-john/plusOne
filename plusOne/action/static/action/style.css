@@ -80,6 +80,15 @@ a:hover {
     font-size: 24px;
 }
 
+.form-dd {
+    background-color: #000000;
+    color: #eee;
+    border-color: black;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 24px;
+}
+
 .dt-gray {
     color: #888 !important;
 }
