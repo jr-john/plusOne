@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<title> +1 | Home </title>
+{% endblock %}
+
 {% block body %}
 <div class="container card home-card p-5 mt-5 shadow-lg" action="search/">
     <form id="trip" method="POST"> {% csrf_token %}

@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block head %}
+<title> +1 | New Trip </title>
+{% endblock %}
+
 {% block body %}
 <form method="POST"> {% csrf_token %}
     {{ form.as_p }}
