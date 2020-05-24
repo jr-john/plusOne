@@ -6,6 +6,6 @@ urlpatterns = [
     path("activity/", activity, name="activity"),
     path("search/", search, name="search"),
     path("search/add/", add, name="add"),
-    path("activity/stop/", stop, name="stop"),
+    path("activity/stop/<int:id>", stop, name="stop"),
     path("search/trip/<int:id>", tripdetails, name="tripdetails")
 ]

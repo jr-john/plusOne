@@ -1,19 +1,22 @@
 {% extends "base.html" %}
-{% block head %}<title>MY ACTIVITY</title>{% endblock %}
 {% block body %}
 
-<h3>UPCOMING_TRIPS</h3><br>
-
-    {% for feed in feeds %}
-    
-    <div>
-        <h4>source:</h4><p>{{ feed.source }}</p><br>
-        <h4>destination:</h4><p>{{ feed.destination }}</p><br>
-        <h4>date and time:</h4><p>{{ feed.journey_datetime }}</p><br>
-        <br><br>
-    </div>
+    <div class="container mb-5">
+    {% for trip in trips %}
+        <div class="container search-result-item card home-card p-5 mt-5 shadow-lg">
+            <div class="search-result-item-heading-label pt-3"> TO </div>
+            <h4 class="search-result-item-heading">{{ trip.destination }}</h4>
+            <div class="search-result-item-heading-label pt-3"> FROM </div>
+            <h4 class="search-result-item-heading">{{ trip.source }}</h4>
+            <p class="info pt-3">{{ trip.journey_date }}, {{ trip.journey_time }}</p>
+            <br><br>
+            {% if trip.is_active %}
+            <form action="stop/{{ trip.id }}">
+                <button class="btn btn-outline-danger outline-btn" type="submit"> Stop accepting requests </button>
+            </form>
+            {% endif %}
+        </div>
     {% endfor %}
-    <form action="stop/">
-        <input type="submit" value="stop accepting requests">
-    </form>
+    </div>
+
 {% endblock %}

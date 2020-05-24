@@ -6,6 +6,9 @@ import datetime
 import json
 from django.contrib.auth.models import User
 
+import logging
+logger = logging.getLogger(__name__)
+
 TAG_DICT = {
     'airport': 'Rajiv Gandhi International Airport',
     'railway-secunderabad': 'Secunderabad Railway Station',
@@ -33,27 +36,31 @@ def home(request, *args, **kwargs):
 
 # @login_required
 def activity(request, *args, **kwargs):
-    trips = []
-    req = []
-    trips = Trip.objects.all()
-    for trip in trips:
-        if request.user.username == trip.owner:
-            req.append(trip)
+    trips = Trip.objects.filter(owner = request.user.username)
+    objs = [
+        {
+            "id" : trip.id,
+            "source" : TAG_DICT[trip.source],
+            "destination" : TAG_DICT[trip.destination],
+            "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
+            "journey_time" : trip.journey_time.strftime("%H:%M"),
+            "is_active" : trip.is_active
+        } for trip in trips
+    ]
 
     context = {
-        'feeds' : req,
-        'hidemy': True
+        'trips': objs
     }
     return render(request, "activity.html", context)
 
 
 # @login_required
-def stop(request, *args, **kwargs):
-    trips = Trip.objects.all()
-    for trip in trips:
-        if trip.owner == request.user.username:
-            trip.is_active = False
-            trip.save()
+def stop(request, id):
+    trip = Trip.objects.get(id = id)
+    logger.warning('entered stop')
+    logger.warning(trip.is_active)
+    trip.is_active = False
+    trip.save()
     return redirect("activity")
 
 # @login_required
