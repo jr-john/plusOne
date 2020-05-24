@@ -42,6 +42,7 @@ def stop(request, *args, **kwargs):
     for trip in trips:
         if trip.owner == request.user.username:
             trip.is_active = False
+            trip.save()
     return redirect("activity")
 
 # @login_required
@@ -74,12 +75,14 @@ def search(request, *args, **kwargs):
         "destination" : destination_query,
         "journey_date" : date_query,
         "journey_time" : time_query}, default=str)
-    # print("params",params)
-    # print("list",object_list)
+    print("params",params)
+    print("list",object_list)
     context = {"params":params, "object_list":object_list}
     return render(request, "search.html", context)
 
-
-
-def add(request):
-    return render(request, 'newTrip.html')
+# @login_required
+def add(request, *args, **kwargs):
+    search_query = Trip.objects.latest("id")
+    search_query.is_active = True
+    search_query.save()
+    return redirect("/")
