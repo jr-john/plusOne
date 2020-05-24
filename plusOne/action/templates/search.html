@@ -27,7 +27,7 @@
                     <div class="search-result-item-heading-label pt-3"> FROM </div>
                     <h4 class="search-result-item-heading">{{ object.source }}</h4>
                 </div>
-                <div class="col text-right">
+                <div class="col-xs px-3 text-right">
                     <form action="trip/{{ object.id }}" method="POST"> {% csrf_token %}
                         <button class="btn btn-outline-danger outline-btn btn-md" >+1</button>
                     </form>
