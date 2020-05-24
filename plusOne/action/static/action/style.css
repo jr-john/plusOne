@@ -41,14 +41,13 @@ body {
 }
 
 .po-icon {
-    font-weight: 600;
-    font-size: 28px;
-    color: white;
+    width: 48px;
+    height: 48px;
+    filter: invert(100%) grayscale(100%) brightness(100%);
 }
 
-a:hover {
-    color: red;
-    text-decoration: none;
+.po-icon:hover {
+    filter: none;
 }
 
 
