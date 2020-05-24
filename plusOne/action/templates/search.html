@@ -20,11 +20,12 @@
         <section class="search-result-item home-card shadow-lg">
             <div class="row">
                 <div class="col">
+                    <p class="search-dt s-date">{{ object.journey_date }}
+                    <h1 class="search-dt s-time">{{ object.journey_time }}</h1>
                     <div class="search-result-item-heading-label pt-3"> TO </div>
                     <h4 class="search-result-item-heading">{{ object.destination }}</h4>
                     <div class="search-result-item-heading-label pt-3"> FROM </div>
                     <h4 class="search-result-item-heading">{{ object.source }}</h4>
-                    <p class="info pt-3">{{ object.journey_date }}, {{ object.journey_time }}</p>
                 </div>
                 <div class="col text-right">
                     <form action="trip/{{ object.id }}" method="POST"> {% csrf_token %}
