@@ -42,8 +42,7 @@ def stop(request, *args, **kwargs):
     for trip in trips:
         if trip.owner == request.user.username:
             trip.is_active = False
-            break
-    return redirect("activity/")
+    return redirect("activity")
 
 # @login_required
 def search(request, *args, **kwargs):
@@ -79,3 +78,8 @@ def search(request, *args, **kwargs):
     # print("list",object_list)
     context = {"params":params, "object_list":object_list}
     return render(request, "search.html", context)
+
+
+
+def add(request):
+    return render(request, 'newTrip.html')
