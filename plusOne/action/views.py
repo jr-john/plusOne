@@ -76,7 +76,7 @@ def search(request, *args, **kwargs):
         destination=destination_query,
         journey_time__gte= dt_query - datetime.timedelta(hours=1.5),
         journey_time__lte= dt_query + datetime.timedelta(minutes=30),
-        is_active=True)
+        is_active=True).exclude(owner=request.user.username)
     object_list = [
         {
             "id" : trip.id,
