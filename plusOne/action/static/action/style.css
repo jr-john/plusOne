@@ -89,6 +89,10 @@ body {
     font-size: 56px;
 }
 
+.solid-nav {
+    background-color: #000000 !important;
+}
+
 #trip label, #reg label {
     color: #b3b3b3;
     font-weight: 500;
