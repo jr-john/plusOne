@@ -45,7 +45,9 @@ def activity(request, *args, **kwargs):
             "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
             "journey_time" : trip.journey_time.strftime("%H:%M"),
             "is_active" : trip.is_active
-        } for trip in trips
+        } 
+        for trip in trips
+        if datetime.datetime.combine(trip.journey_date, trip.journey_time) >= datetime.datetime.now()
     ]
 
     context = {
@@ -62,6 +64,7 @@ def stop(request, id):
     trip.is_active = False
     trip.save()
     return redirect("activity")
+
 
 @login_required
 def search(request, *args, **kwargs):
@@ -93,6 +96,7 @@ def search(request, *args, **kwargs):
     context = {"object_list":object_list}
     return render(request, "search.html", context)
 
+
 @login_required
 def add(request, *args, **kwargs):
     search_query = Trip.objects.latest("id")
@@ -100,6 +104,7 @@ def add(request, *args, **kwargs):
     search_query.owner = request.user.username
     search_query.save()
     return redirect("/")
+
 
 @login_required
 def tripdetails(request, id):
