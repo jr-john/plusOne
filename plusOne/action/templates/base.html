@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'action/style.css' %}">
     {% block head %} {% endblock %}
 </head>
-<nav class="navbar navbar-expand-md navbar-dark navbar-black fixed-top bg-dark">
+<nav id="main-nav" class="navbar navbar-expand-md navbar-dark navbar-black fixed-top bg-dark">
     <a href="/">
     <img class="po-icon" src="{% static 'action/po_logo.png'%}">
     </a>
@@ -29,4 +29,16 @@
         {% block body %} {% endblock %}
     </div>
 </body>
+<script>
+var navbar = document.getElementById('main-nav');
+window.onscroll = () => { 
+    if(window.scrollY <= 100) {
+        console.log('transparent');
+        navbar.classList.remove('solid-nav');
+    } else {
+        console.log('solid');
+        navbar.classList.add('solid-nav');
+    }
+};
+</script>
 </html>
