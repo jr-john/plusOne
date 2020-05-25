@@ -86,6 +86,7 @@ def search(request, *args, **kwargs):
     
     object_list = [
         {
+            
             "id" : trip.id,
             "source" : TAG_DICT[trip.source],
             "destination" : TAG_DICT[trip.destination],
