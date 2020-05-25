@@ -83,6 +83,7 @@ def search(request, *args, **kwargs):
         journey_time__gte= dt_query_min ,
         journey_time__lte= dt_query_max ,
         is_active=True).exclude(owner=request.user.username)
+    
     object_list = [
         {
             "id" : trip.id,
