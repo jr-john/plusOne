@@ -21,3 +21,5 @@ class Trip(models.Model):
     journey_time = models.TimeField(default = def_time)
     is_active = models.BooleanField(default = False)
     owner = models.CharField(max_length = 100, null = True, blank = True)
+    minima = models.TimeField(default = def_time)
+    maxima = models.TimeField(default = def_time)
