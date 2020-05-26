@@ -25,7 +25,15 @@ def home(request, *args, **kwargs):
     
     form = TripForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        data = form.cleaned_data
+        print(data)
+        request.session['data'] = {
+            "source" : data.get("source"),
+            "destination" : data.get("destination"),
+            "journey_date" : data.get("journey_date").strftime("%d/%m/%Y"),
+            "journey_time" : data.get("journey_time").strftime("%H:%M"),
+            "minima" : str(data.get("minima")),
+            "maxima" : str(data.get("maxima"))}
         return redirect("search/")
     context = {
         "form" : form
@@ -68,25 +76,17 @@ def stop(request, id):
 
 
 # @login_required
-def stop(request, id):
-    trip = Trip.objects.get(id = id)
-    logger.warning('entered stop')
-    logger.warning(trip.is_active)
-    trip.is_active = False
-    trip.save()
-    return redirect("activity")
-
-
-# @login_required
 def search(request, *args, **kwargs):
-    search_query = Trip.objects.latest("id")
-    source_query = search_query.source
-    destination_query = search_query.destination
-    date_query = search_query.journey_date
-    time_query=search_query.journey_time
-    min_query = search_query.minima
-    max_query = search_query.maxima
-    dt_query=datetime.datetime.combine(date_query, time_query)
+    search_query = request.session.get('data', {})
+    source_query = search_query.get("source")
+    destination_query = search_query.get("destination")
+    date_query = search_query.get("journey_date")
+    date_query = datetime.datetime.strptime(date_query, "%d/%m/%Y").date()
+    time_query = search_query.get("journey_time")
+    time_query = datetime.datetime.strptime(time_query, "%H:%M").time()
+    min_query = float(search_query.get("minima"))
+    max_query = float(search_query.get("maxima"))
+    dt_query = datetime.datetime.combine(date_query, time_query)
     dt_query_min = dt_query - datetime.timedelta(minutes = min_query)
     dt_query_max = dt_query + datetime.timedelta(minutes = max_query)
     trips = Trip.objects.filter(
@@ -118,10 +118,21 @@ def search(request, *args, **kwargs):
 
 # @login_required
 def add(request, *args, **kwargs):
-    search_query = Trip.objects.latest("id")
-    search_query.is_active = True
-    search_query.owner = request.user.username
-    search_query.save()
+    search_query = request.session.get("data", {})
+    source_query = search_query.get("source")
+    destination_query = search_query.get("destination")
+    date_query = search_query.get("journey_date")
+    date_query = datetime.datetime.strptime(date_query, "%d/%m/%Y").date()
+    time_query = search_query.get("journey_time")
+    time_query = datetime.datetime.strptime(time_query, "%H:%M").time()
+    Trip.objects.create(
+        source = source_query,
+        destination = destination_query,
+        journey_date = date_query,
+        journey_time = time_query,
+        is_active = True,
+        owner = request.user.username
+    )
     return redirect("/")
 
 
