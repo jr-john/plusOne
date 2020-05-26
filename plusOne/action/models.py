@@ -7,11 +7,12 @@ def def_time():
 
 def def_journey_time():
     dt = timezone.now() + timedelta(minutes=10)
-    return dt.time()
+    return dt.time().strftime("%H:%M")
 
 def def_journey_time_max():
     dt = timezone.now() + timedelta(minutes=20)
-    return dt.time()
+    return dt.time().strftime("%H:%M")
+
 TAG_LIST = [
     ['airport', 'Rajiv Gandhi International Airport'],
     ['railway-secunderabad', 'Secunderabad Railway Station'],
