@@ -1,5 +1,4 @@
 env0/
 __pycache__/
 *.pyc
-plusOne/db.sqlite3
-plusOne/plusOne/settings.py
+db.sqlite3
