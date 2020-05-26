@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'fgcv!i*#og-@&)f6b3b_7yf!luy&0cc-qp4%seec$44*x@@)*q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cas',
+    # 'cas',
     'action',
     'cas_auth',
 ]
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'cas.middleware.CASMiddleware',
+    # 'cas.middleware.CASMiddleware',
 ]
 
 ROOT_URLCONF = 'plusOne.urls'
@@ -104,10 +104,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    'cas.backends.CASBackend',
-    'django.contrib.auth.backends.ModelBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     'cas.backends.CASBackend',
+#     'django.contrib.auth.backends.ModelBackend',
+# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -122,11 +122,11 @@ USE_L10N = True
 
 USE_TZ = False
 
-CAS_SERVER_URL = "https://login.iiit.ac.in/cas/"
+# CAS_SERVER_URL = "https://login.iiit.ac.in/cas/"
 
-CAS_LOGOUT_COMPLETELY = True
+# CAS_LOGOUT_COMPLETELY = True
 
-CAS_PROVIDE_URL_TO_LOGOUT = True
+# CAS_PROVIDE_URL_TO_LOGOUT = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -145,5 +145,6 @@ prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
 ALLOWED_HOSTS = [
-    'heckermen-plus-one.herokuapp.com'
+    'heckermen-plus-one.herokuapp.com',
+    '127.0.0.1'
 ]

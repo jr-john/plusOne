@@ -18,10 +18,10 @@ TAG_DICT = {
     'college':'IIIT Hyderabad Campus'
 }
 
-@login_required
+# @login_required
 def home(request, *args, **kwargs):
-    if not request.user.first_name:
-        return redirect('/register/')
+    # if not request.user.first_name:
+    #    return redirect('/register/')
     
     form = TripForm(request.POST or None)
     if form.is_valid():
@@ -33,7 +33,7 @@ def home(request, *args, **kwargs):
     return render(request, "home.html", context)
 
 
-@login_required
+# @login_required
 def activity(request, *args, **kwargs):
     trips = Trip.objects.filter(owner = request.user.username)
     object_list=[]
@@ -57,7 +57,7 @@ def activity(request, *args, **kwargs):
     return render(request, "activity.html", context)
 
 
-@login_required
+# @login_required
 def stop(request, id):
     trip = Trip.objects.get(id = id)
     logger.warning('entered stop')
@@ -67,7 +67,7 @@ def stop(request, id):
     return redirect("activity")
 
 
-@login_required
+# @login_required
 def stop(request, id):
     trip = Trip.objects.get(id = id)
     logger.warning('entered stop')
@@ -77,7 +77,7 @@ def stop(request, id):
     return redirect("activity")
 
 
-@login_required
+# @login_required
 def search(request, *args, **kwargs):
     search_query = Trip.objects.latest("id")
     source_query = search_query.source
@@ -116,7 +116,7 @@ def search(request, *args, **kwargs):
     }
     return render(request, "search.html", context)
 
-@login_required
+# @login_required
 def add(request, *args, **kwargs):
     search_query = Trip.objects.latest("id")
     search_query.is_active = True
@@ -125,7 +125,7 @@ def add(request, *args, **kwargs):
     return redirect("/")
 
 
-@login_required
+# @login_required
 def tripdetails(request, id):
     trip = Trip.objects.get(id = id)
     owner = User.objects.get(username = trip.owner)

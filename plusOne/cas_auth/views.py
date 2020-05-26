@@ -12,6 +12,7 @@ def register_user(request):
     if request.method == 'POST':
         form.save()
         return redirect('/')
+        
     context = {
         'form': form
     }
