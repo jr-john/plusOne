@@ -12,7 +12,7 @@
         {{ form.source }}<br/>
         <label class="ml-1"> {{ form.destination.label }} </label>
         {{ form.destination }}
-        <label class="ml-1"> {{ form.journey_date.label }} </label>
+        <label class="ml-1" id="date-chooser"> {{ form.journey_date.label }} </label>
         <div class="form-row">
             <div class="col"> {{ form.journey_date }} </div>
             <div class="col"> {{ form.journey_time }} </div>
@@ -42,8 +42,29 @@
 </div>
 <script>
     function myFunction() {
-        console.log(typeof document.getElementById("myLocalDate").value)
-        console.log(document.getElementById("myLocalDate").value)
-      }
+        console.log(typeof document.getElementById("myLocalDate").value);
+        console.log(document.getElementById("myLocalDate").value);
+        document.getElementById("date-chooser").value = document.getElementById("myLocalDate").value;
+      };
 </script> 
+
+<!-- Second Widget -->
+<div class='input-group date' id='datetimepicker1'>
+    <input type='text' class="form-control" id="LocalDate" />
+    <span class="input-group-addon"></span>
+    <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</div>
+<button onclick="myFunction1()">Try it</button>
+  
+<script>
+    $(function () {
+      $('#datetimepicker1').datetimepicker();
+   });
+   function myFunction1() {
+        console.log(typeof document.getElementById("LocalDate").value);
+        console.log(document.getElementById("LocalDate").value);
+ };
+</script>
+
 {% endblock %}
