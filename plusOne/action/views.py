@@ -50,7 +50,8 @@ def activity(request, *args, **kwargs):
     ]
 
     context = {
-        'trips': objs
+        'trips': objs,
+        'populated': len(objs)
     }
     return render(request, "activity.html", context)
 
@@ -97,7 +98,11 @@ def search(request, *args, **kwargs):
         for trip in trips
         if datetime.datetime.combine(trip.journey_date, trip.journey_time) >= datetime.datetime.now()
     ]
-    context = {"object_list":object_list}
+
+    context = {
+        "object_list": object_list,
+        "populated": len(object_list)
+    }
     return render(request, "search.html", context)
 
 

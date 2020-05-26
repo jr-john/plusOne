@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block body %}
-<div class="container reg-header fin-h text-left pt-5"> Upcoming trips </div>
-<div class="container mb-5">
-{% for trip in trips %}
+<div class="container reg-header fin-h text-center pt-5"> Upcoming trips </div>
+<div class="container pt-5 mb-5">
+    {% if not populated %}
+        <div class="not-populated-banner text-center p-5">
+            No trips found :(
+        </div>
+    {% endif %}
+    {% for trip in trips %}
     <div class="container search-result-item card home-card p-5 mt-5 shadow-lg">
         <div class="search-result-item-heading-label pt-3"> TO </div>
         <h4 class="search-result-item-heading">{{ trip.destination }}</h4>
@@ -21,7 +26,7 @@
         </form>
         {% endif %}
     </div>
-{% endfor %}
+    {% endfor %}
 </div>
 
 {% endblock %}

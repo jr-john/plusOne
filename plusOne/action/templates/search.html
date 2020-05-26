@@ -8,7 +8,11 @@
 <div class="container reg-header fin-h text-center pt-5"> Active trips </div>
 <div class="container overflow-hidden pt-5">
     <div class="container overflow-auto centered">
-
+        {% if not populated %}
+        <div class="not-populated-banner text-center p-5">
+            No trips found :(
+        </div>
+        {% endif %}
         {% for object in object_list %}
             {% if forloop.counter0|divisibleby:3 %}
                 {% if forloop.counter0 != 0 %}
