@@ -33,38 +33,20 @@
         </div>
         <button class="btn btn-outline-danger outline-btn p-2 px-4 mt-4" type="submit"> GO! </button>
     </form>
+    <br>
+    <div style="background-color:azure">
+        <input id="input2" width="312" />
+        <script>
+            $('#input2').datetimepicker({ footer: true, modal: true });
+        </script>
+    </div>
+    <button onclick="myFunction()">Pick (Check Console)</button>
+    <script>
+        function myFunction() {
+            var val = document.getElementById('input2').value;
+            console.log(val);
+        }
+    </script>
 </div>
-
-<!-- Comment the below to get rid of calender -->
-<div>
-        <input id="myLocalDate" type="datetime-local">
-        <button onclick="myFunction()">Try it</button>
-</div>
-<script>
-    function myFunction() {
-        console.log(typeof document.getElementById("myLocalDate").value);
-        console.log(document.getElementById("myLocalDate").value);
-        document.getElementById("date-chooser").value = document.getElementById("myLocalDate").value;
-      };
-</script> 
-
-<!-- Second Widget -->
-<div class='input-group date' id='datetimepicker1'>
-    <input type='text' class="form-control" id="LocalDate" />
-    <span class="input-group-addon"></span>
-    <span class="glyphicon glyphicon-calendar"></span>
-    </span>
-</div>
-<button onclick="myFunction1()">Try it</button>
-  
-<script>
-    $(function () {
-      $('#datetimepicker1').datetimepicker();
-   });
-   function myFunction1() {
-        console.log(typeof document.getElementById("LocalDate").value);
-        console.log(document.getElementById("LocalDate").value);
- };
-</script>
 
 {% endblock %}

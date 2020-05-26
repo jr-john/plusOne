@@ -12,6 +12,9 @@ body {
     justify-content: center;
     flex-direction: column;
 }
+.gj-datepicker-bootstrap span[role="right-icon"] .input-group-text {
+    padding: 7px 8px 7px 30px;
+  }
 
 .main-bg {
     height: 100vh;
