@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Trip
 from .forms import TripForm
 import datetime
+import time
 import json
 from django.contrib.auth.models import User
 import logging
@@ -22,11 +23,9 @@ TAG_DICT = {
 def home(request, *args, **kwargs):
     # if not request.user.first_name:
     #    return redirect('/register/')
-    
     form = TripForm(request.POST or None)
     if form.is_valid():
         data = form.cleaned_data
-        print(data)
         request.session['data'] = {
             "source" : data.get("source"),
             "destination" : data.get("destination"),
