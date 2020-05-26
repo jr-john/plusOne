@@ -5,7 +5,6 @@ from .forms import TripForm
 import datetime
 import json
 from django.contrib.auth.models import User
-
 import logging
 logger = logging.getLogger(__name__)
 
@@ -72,16 +71,18 @@ def search(request, *args, **kwargs):
     source_query = search_query.source
     destination_query = search_query.destination
     date_query = search_query.journey_date
+    time_query=search_query.journey_time
     min_query = search_query.minima
     print(min_query)
     max_query = search_query.maxima
-    dt_query_min = datetime.datetime.combine(date_query, min_query)
-    dt_query_max = datetime.datetime.combine(date_query, max_query)
+    dt_query=datetime.datetime.combine(date_query, time_query)
+    dt_query_min = dt_query - datetime.timedelta(minutes = min_query)
+    dt_query_max = dt_query + datetime.timedelta(minutes = max_query)
     trips = Trip.objects.filter(
         source=source_query,
         destination=destination_query,
-        journey_time__gte= dt_query_min ,
-        journey_time__lte= dt_query_max ,
+        journey_time__gte= dt_query_min,
+        journey_time__lte= dt_query_max,
         is_active=True).exclude(owner=request.user.username)
     object_list = [
         {

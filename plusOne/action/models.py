@@ -9,9 +9,6 @@ def def_journey_time():
     dt = timezone.now() + timedelta(minutes=10)
     return dt.time().strftime("%H:%M")
 
-def def_journey_time_max():
-    dt = timezone.now() + timedelta(minutes=20)
-    return dt.time().strftime("%H:%M")
 
 TAG_LIST = [
     ['airport', 'Rajiv Gandhi International Airport'],
@@ -30,5 +27,5 @@ class Trip(models.Model):
     journey_time = models.TimeField(default = def_journey_time)
     is_active = models.BooleanField(default = False)
     owner = models.CharField(max_length = 100, null = True, blank = True)
-    minima = models.TimeField(default = def_time)
-    maxima = models.TimeField(default = def_journey_time_max)
+    minima = models.IntegerField(default = 10)
+    maxima = models.IntegerField(default = 10)

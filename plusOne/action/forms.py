@@ -25,6 +25,8 @@ class TripForm(forms.ModelForm):
             "destination": forms.Select(attrs = {'class': 'form-dd py-3 pl-2 mb-4', 'autocomplete': 'off'}),
             "journey_date": forms.DateInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
             "journey_time": forms.TimeInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
-            "minima": forms.TimeInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
-            "maxima": forms.TimeInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'})
+            "minima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
+            "maxima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'})
         }
+
+        #fix widget
