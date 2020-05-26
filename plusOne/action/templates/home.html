@@ -28,4 +28,16 @@
         <button class="btn btn-outline-danger outline-btn p-2 px-4 mt-4" type="submit"> GO! </button>
     </form>
 </div>
+
+<!-- Comment the below to get rid of calender -->
+<div>
+        <input id="myLocalDate" type="datetime-local">
+        <button onclick="myFunction()">Try it</button>
+</div>
+<script>
+    function myFunction() {
+        console.log(typeof document.getElementById("myLocalDate").value)
+        console.log(document.getElementById("myLocalDate").value)
+      }
+</script> 
 {% endblock %}
