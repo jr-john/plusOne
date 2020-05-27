@@ -12,14 +12,13 @@ def register_user(request):
     #    return redirect('/')
     form = UserForm(request.POST or None, instance = request.user)
     if request.method == 'POST':
-        Form=UserForm(request.POST)
-        if Form.is_valid():
-            temp_list=Form.cleaned_data
+        if form.is_valid():
+            temp_list=form.cleaned_data
             temp_num=temp_list.get('last_name')
             temp_email=temp_list.get('email')
             x=re.findall("[0-9]", temp_num)
             if len(x) == 10 :
-                Form.save()
+                form.save()
                 return redirect('/')
             else:
                 messages.info(request, 'Enter Valid Phone Number')

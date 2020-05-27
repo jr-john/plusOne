@@ -95,9 +95,8 @@ def stop(request, id):
 def edit(request, *args, **kwargs):
     form = EditForm(request.POST or None, instance = request.user)
     if request.method == 'POST':
-        Form=EditForm(request.POST)
-        if Form.is_valid():
-            temp_list=Form.cleaned_data
+        if form.is_valid():
+            temp_list=form.cleaned_data
             temp_name=temp_list.get('first_name')
             temp_num=temp_list.get('last_name')
             temp_email=temp_list.get('email')
