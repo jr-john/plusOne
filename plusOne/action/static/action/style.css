@@ -111,6 +111,15 @@ body {
     filter: none;
 }
 
+.error-bg {
+    background-color: #b71c1c22;
+    border: 2px solid #b71c1c88;
+    border-radius: 8px;
+}
+
+.error-fg {
+    color: #d62a2a !important;
+}
 
 .home-card {
     max-width: 500px;

@@ -6,34 +6,41 @@
 
 {% block body %}
 <div class="container reg-header fin-h text-left pt-4"> Ready to go? </div>
-<div class="container card home-card p-5 mb-5 mt-5 shadow-lg" action="search/">
+<div class="container card home-card p-4 mb-5 mt-5 shadow-lg" action="search/">
     <form id="trip" method="POST"> {% csrf_token %}
-        <label class="ml-1"> {{ form.source.label }} </label>
-        {{ form.source }}<br/>
-        <label class="ml-1"> {{ form.destination.label }} </label>
-        {{ form.destination }}
-        <label class="ml-1" id="date-chooser"> {{ form.journey_date.label }} </label>
-        <div class="form-row">
-            <div class="col-lg">
-                <input type="text" class="form-control dt-gray datetimepicker-input" autocomplete="off" id="datefield" data-toggle="datetimepicker" data-target="#datefield"/>
-            </div>
-            <div class="col-md-4"> 
-                <input type="text" class="form-control dt-gray datetimepicker-input" autocomplete="off" id="timefield" data-toggle="datetimepicker" data-target="#timefield"/>
-            </div>
+        <div id="places-container">
+            <label class="ml-1"> {{ form.source.label }} </label>
+            {{ form.source }}<br/>
+            <label class="ml-1"> {{ form.destination.label }} </label>
+            {{ form.destination }}
+            <label class="ml-1 error-fg"></label>
         </div>
-        <label class="ml-1 pt-3"> I'M FINE WITH STARTING... </label>
-        <div class="form-row">
-            <div class="col"> 
-                {{ form.minima }} 
-                <div class="text-right">
-                    <label class="ml-1 "> MINS BEFORE </label> 
+        <div id="datetime-container">
+            <label class="ml-1" id="date-chooser"> {{ form.journey_date.label }} </label>
+            <div class="form-row">
+                <div class="col-lg mb-2">
+                    <input type="text" class="form-control dt-gray datetimepicker-input" autocomplete="off" id="datefield" data-toggle="datetimepicker" data-target="#datefield"/>
+                </div>
+                <div class="col-md-4"> 
+                    <input type="text" class="form-control dt-gray datetimepicker-input" autocomplete="off" id="timefield" data-toggle="datetimepicker" data-target="#timefield"/>
                 </div>
             </div>
-            <label class="p-3"> OR </label>
-            <div class="col">
-                {{ form.maxima }}
-                <div class="text-right">
-                    <label class="ml-1 "> MINS AFTER </label> 
+        </div>
+        <div id="extrema-container">
+            <label class="ml-1 pt-3"> I'M FINE WITH STARTING... </label>
+            <div class="form-row">
+                <div class="col"> 
+                    {{ form.minima }} 
+                    <div class="text-right">
+                        <label class="ml-1 "> MINS BEFORE </label> 
+                    </div>
+                </div>
+                <label class="p-3"> OR </label>
+                <div class="col">
+                    {{ form.maxima }}
+                    <div class="text-right">
+                        <label class="ml-1 "> MINS AFTER </label> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,8 +86,33 @@
             success: function() {
                 window.location.href = '/search'
             },
-            error: function() {
-                console.log('failure')
+            error: function(data) {
+                var jsonResponse = JSON.parse(data.responseText)
+                function flashError(target, message) {
+                    var container = document.getElementById(target + '-container')
+                    if (!(container.classList.contains('error-bg'))) {
+                        container.classList.add('error-bg', 'p-2', 'my-1');
+                        $('#' + target + '-container').append('<label id='+target+'-error class="ml-1 error-fg">'+message+'</label>');
+                    }
+                }
+
+                function killError(target) {
+                    document.getElementById(target + '-container').classList.remove('error-bg', 'p-2', 'my-1');
+                    $('#' + target + '-error').remove();
+                }
+
+
+                if(jsonResponse.hasOwnProperty('source')) {
+                    flashError('places', jsonResponse.source);
+                } else {
+                    killError('places');
+                }
+
+                if(jsonResponse.hasOwnProperty('journey_time')) {
+                    flashError('datetime', jsonResponse.journey_time);
+                } else {
+                    killError('datetime');
+                }
             }
         });
     });
