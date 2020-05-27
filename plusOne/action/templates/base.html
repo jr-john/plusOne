@@ -26,6 +26,11 @@
             <button class="btn btn-outline-success outline-btn nav-btn mx-2" type="submit"> MY TRIPS </button>
         </form>
         {% endif %}
+        {% if not hidemy %}
+        <form class="form-inline my-2" action="/profile/">
+            <button class="btn btn-outline-warning outline-btn nav-btn mx-2" type="submit"> MY PROFILE </button>
+        </form>
+        {% endif %}
         <form class="form-inline my-2" action="/accounts/logout/">
             <button class="btn btn-outline-primary outline-btn nav-btn mx-2" type="submit"> LOG OUT </button>
         </form>

@@ -26,3 +26,8 @@ class Trip(models.Model):
     owner = models.CharField(max_length = 100, null = True, blank = True)
     minima = models.IntegerField(default = 10)
     maxima = models.IntegerField(default = 10)
+
+class Profile(models.Model):
+    first_name = models.CharField(max_length = 100, default = '')
+    last_name = models.CharField(max_length = 100, default = '')
+    email = models.EmailField(max_length = 100, default = '')

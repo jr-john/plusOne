@@ -8,13 +8,16 @@ class UserForm(forms.ModelForm):
         model = User
         fields = [
             'first_name',
-            'last_name'
+            'last_name',
+            'email'
         ]
         labels = {
             'first_name': 'YOUR NAME?',
-            'last_name': 'CONTACT INFO?'
+            'last_name': 'PHONE NUMBER?',
+            'email': 'EMAIL ADDRESS?'
         }
         widgets = {
             'first_name': forms.TextInput(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'}),
             'last_name': forms.TextInput(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'}),
+            'email': forms.TextInput(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'})
         }

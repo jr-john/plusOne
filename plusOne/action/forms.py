@@ -1,7 +1,31 @@
 from django import forms
-from .models import Trip
+from .models import Trip, Profile
 import datetime
 from django.utils import timezone
+
+from django.contrib.auth.models import User
+
+
+class EditForm(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = [
+            'first_name',
+            'last_name',
+            'email'
+        ]
+        labels = {
+            'first_name': 'YOUR NAME?',
+            'last_name': 'PHONE NUMBER?',
+            'email': 'EMAIL ADDRESS?'
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'}),
+            'last_name': forms.TextInput(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'}),
+            'email': forms.TextInput(attrs = {'class': 'form-control py-4 mb-4', 'autocomplete': 'off'})
+        }
+
 
 class TripForm(forms.ModelForm):
     class Meta:

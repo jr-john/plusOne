@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Trip
-from .forms import TripForm
+from .forms import TripForm, EditForm
 import datetime
 import time
 import json
 from django.contrib.auth.models import User
 import logging
+import re
+from django.contrib import messages
 logger = logging.getLogger(__name__)
 
 TAG_DICT = {
@@ -74,6 +76,12 @@ def activity(request, *args, **kwargs):
     }
     return render(request, "activity.html", context)
 
+def profile(request, *args, **kwargs):
+    print(request.user.first_name)
+    context={
+        'user_list' : request.user
+    }
+    return render(request, 'profile.html', context)
 
 # @login_required
 def stop(request, id):
@@ -83,6 +91,34 @@ def stop(request, id):
     trip.is_active = False
     trip.save()
     return redirect("activity")
+
+def edit(request, *args, **kwargs):
+    form = EditForm(request.POST or None, instance = request.user)
+    if request.method == 'POST':
+        Form=EditForm(request.POST)
+        if Form.is_valid():
+            temp_list=Form.cleaned_data
+            temp_name=temp_list.get('first_name')
+            temp_num=temp_list.get('last_name')
+            temp_email=temp_list.get('email')
+            x=re.findall("[0-9]", temp_num)
+            if len(x) == 10 :
+                request.user.first_name = temp_name
+                request.user.last_name = temp_num
+                request.user.email = temp_email
+                request.user.save()
+                return redirect('/profile')
+            else:
+                messages.info(request, 'Enter Valid Phone Number')
+                return render(request, 'edit.html', {'form' : form})
+        else:
+            messages.info(request, 'Enter valid email address')
+            return render(request, 'edit.html', {'form' : form})       
+    context = {
+        'form': form
+    }
+    print("yes")
+    return render(request, 'edit.html', context)
 
 
 # @login_required

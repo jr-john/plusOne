@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> +1 | My Trips </title>
+{% endblock %}
+
+{% block body %}
+<div class="container reg-header fin-h text-center pt-5"> My Profile </div>
+<div class="container search-result-item card home-card p-5 mt-5 shadow-lg">
+    <div class="search-result-item-heading-label pt-3"> NAME </div>
+    <h4 class="search-result-item-heading">{{ user_list.first_name }}</h4>
+    <div class="search-result-item-heading-label pt-3"> PHONE NUMBER </div>
+    <h4 class="search-result-item-heading">{{ user_list.last_name }}</h4>
+    <div class="search-result-item-heading-label pt-3"> EMAIL ADDRESS </div>
+    <h4 class="search-result-item-heading">{{ user_list.email }}</h4>
+    <br><br>
+    <form action="/profile/edit/">
+        <button class="btn btn-outline-danger outline-btn" type="submit"> Edit Profile </button>
+    </form>
+</div>
+
+
+{% endblock %}
