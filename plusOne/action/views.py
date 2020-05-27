@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Trip
 from .forms import TripForm
@@ -24,16 +25,24 @@ def home(request, *args, **kwargs):
     # if not request.user.first_name:
     #    return redirect('/register/')
     form = TripForm(request.POST or None)
-    if form.is_valid():
-        data = form.cleaned_data
+    if request.method == 'POST':
+        source = request.POST.get('source')
+        destin = request.POST.get('destination')
+        j_time = request.POST.get('time')
+        j_date = request.POST.get('date')
+        minima = request.POST.get('minima')
+        maxima = request.POST.get('maxima')
+        print(source, destin, j_time, j_date, minima, maxima, sep = '\n')
         request.session['data'] = {
-            "source" : data.get("source"),
-            "destination" : data.get("destination"),
-            "journey_date" : data.get("journey_date").strftime("%d/%m/%Y"),
-            "journey_time" : data.get("journey_time").strftime("%H:%M"),
-            "minima" : str(data.get("minima")),
-            "maxima" : str(data.get("maxima"))}
-        return redirect("search/")
+            "source" : source,
+            "destination" : destin,
+            "journey_date" : j_date,
+            "journey_time" : j_time,
+            "minima" : str(minima),
+            "maxima" : str(maxima)
+        }
+        return JsonResponse({'success': True})
+
     context = {
         "form" : form
     }
@@ -101,8 +110,7 @@ def search(request, *args, **kwargs):
             trip.delete()
             continue
         if dt >= dt_query_min and dt <= dt_query_max:
-            object_list.append(
-                {
+            object_list.append({
                     "id" : trip.id,
                     "source" : TAG_DICT[trip.source],
                     "destination" : TAG_DICT[trip.destination],

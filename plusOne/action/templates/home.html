@@ -15,10 +15,10 @@
         <label class="ml-1" id="date-chooser"> {{ form.journey_date.label }} </label>
         <div class="form-row">
             <div class="col">
-                <input type="text" class="form-control datetimepicker-input" id="datefield" data-toggle="datetimepicker" data-target="#datefield"/>
+                <input type="text" class="form-control datetimepicker-input" autocomplete="off" id="datefield" data-toggle="datetimepicker" data-target="#datefield"/>
             </div>
             <div class="col"> 
-                <input type="text" class="form-control datetimepicker-input" id="timefield" data-toggle="datetimepicker" data-target="#timefield"/>
+                <input type="text" class="form-control datetimepicker-input" autocomplete="off" id="timefield" data-toggle="datetimepicker" data-target="#timefield"/>
             </div>
         </div>
         <div class="form-row pt-3">
@@ -35,19 +35,56 @@
             <div class="col"> {{ form.maxima }} </div>
             <p style="color: #b3b3b3;margin-top:10px;font-size:large">MINUTES LATE</p>
         </div>
-        <button class="btn btn-outline-danger outline-btn p-2 px-4 mt-4" type="submit"> GO! </button>
+        <button id="home-submit" class="btn btn-outline-danger outline-btn p-2 px-4 mt-4" type="button"> GO! </button>
     </form>
     <br>
 </div>
 <script type="text/javascript">
     $(function () {
+        var dt = new Date();
         $('#timefield').datetimepicker({
-            format: 'HH:mm'
+            format: 'HH:mm',
+            defaultDate: moment({
+                hour: dt.getHours(),
+                minute: dt.getMinutes()
+            }).add(10, 'm')
         });
     });
     $(function () {
+        var dt = new Date();
         $('#datefield').datetimepicker({
-            format: 'L'
+            format: 'DD/MM/YYYY',
+            defaultDate: moment({
+                day: dt.getDate(),
+                month: dt.getMonth(),
+                year: dt.getFullYear()
+            })
+        });
+    });
+    $('#home-submit').click(function() {
+        console.log($('#timefield').val());
+        console.log($('#datefield').val());
+        console.log($('#id_minima').val());
+        console.log('clicc');
+        $.ajax({
+            url: "/",
+            type: "POST",
+            data: {
+                source: $('#id_source').find(':selected').attr('value'),
+                destination: $('#id_destination').find(':selected').attr('value'),
+                time: $('#timefield').val(),
+                date: $('#datefield').val(),
+                minima: $('#id_minima').val(),
+                maxima: $('#id_maxima').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            dataType: "html",
+            success: function() {
+                window.location.href = '/search'
+            },
+            error: function() {
+                console.log('failure')
+            }
         });
     });
 </script>
