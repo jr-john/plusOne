@@ -45,9 +45,11 @@
 var navbar = document.getElementById('main-nav');
 window.onscroll = () => { 
     if(window.scrollY <= 75) {
+        navbar.classList.add('navbar-black');
         navbar.classList.remove('solid-nav');
     } else {
         navbar.classList.add('solid-nav');
+        navbar.classList.remove('navbar-black');
     }
 };
 </script>

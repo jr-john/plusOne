@@ -25,10 +25,6 @@ body {
     background-color: black;
 }
 
-.navbar-black {
-    background-color: #00000000 !important;
-}
-
 .nav-btn {
     font-weight: 500;
 }
@@ -160,7 +156,13 @@ body {
 }
 
 .solid-nav {
-    background-color: #000000 !important;
+    background-color: #000000EE !important;
+    transition: background-color 300ms linear;
+}
+
+.navbar-black {
+    background-color: #00000000 !important;
+    transition: background-color 300ms linear;
 }
 
 #trip label, #reg label {
