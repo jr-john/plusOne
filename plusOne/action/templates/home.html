@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="container reg-header fin-h text-left pt-5"> Ready to go? </div>
-<div class="container card home-card p-5 mt-5 shadow-lg" action="search/">
+<div class="container card home-card p-5 mb-5 mt-5 shadow-lg" action="search/">
     <form id="trip" method="POST"> {% csrf_token %}
         <label class="ml-1"> {{ form.source.label }} </label>
         {{ form.source }}<br/>
@@ -14,10 +14,14 @@
         {{ form.destination }}
         <label class="ml-1" id="date-chooser"> {{ form.journey_date.label }} </label>
         <div class="form-row">
-            <div class="col"> {{ form.journey_date }} </div>
-            <div class="col"> {{ form.journey_time }} </div>
+            <div class="col">
+                <input type="text" class="form-control datetimepicker-input" id="datefield" data-toggle="datetimepicker" data-target="#datefield"/>
+            </div>
+            <div class="col"> 
+                <input type="text" class="form-control datetimepicker-input" id="timefield" data-toggle="datetimepicker" data-target="#timefield"/>
+            </div>
         </div>
-        <div class="form-row">
+        <div class="form-row pt-3">
             <p style="color: #b3b3b3;margin-left:10px">I AM WILLING TO START </p>
         </div>
         <div class="form-row">
@@ -34,19 +38,18 @@
         <button class="btn btn-outline-danger outline-btn p-2 px-4 mt-4" type="submit"> GO! </button>
     </form>
     <br>
-    <div style="background-color:azure">
-        <input id="input2" width="312" />
-        <script>
-            $('#input2').datetimepicker({ footer: true});
-        </script>
-    </div>
-    <button onclick="myFunction()">Pick (Check Console)</button>
-    <script>
-        function myFunction() {
-            var val = document.getElementById('input2').value;
-            console.log(val);
-        }
-    </script>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#timefield').datetimepicker({
+            format: 'HH:mm'
+        });
+    });
+    $(function () {
+        $('#datefield').datetimepicker({
+            format: 'L'
+        });
+    });
+</script>
 
 {% endblock %}
