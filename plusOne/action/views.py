@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import Trip
 from .forms import TripForm, EditForm
@@ -34,16 +35,37 @@ def home(request, *args, **kwargs):
         j_date = request.POST.get('date')
         minima = request.POST.get('minima')
         maxima = request.POST.get('maxima')
-        print(source, destin, j_time, j_date, minima, maxima, sep = '\n')
-        request.session['data'] = {
-            "source" : source,
-            "destination" : destin,
-            "journey_date" : j_date,
-            "journey_time" : j_time,
-            "minima" : str(minima),
-            "maxima" : str(maxima)
-        }
-        return JsonResponse({'success': True})
+
+        # form validation
+        errorMessages = {}
+        
+        # clean_source
+        if destin == source:
+            errorMessages['source'] = "Invalid! Source cannot be same as Destination!"
+
+        # clean_journey_time
+        journey_datetime = datetime.datetime.combine(
+            datetime.datetime.strptime(j_date, '%d/%m/%Y').date(), 
+            datetime.datetime.strptime(j_time, '%H:%M').time()
+        )
+        if journey_datetime < timezone.now():
+            errorMessages['journey_time'] = "Invalid Time!"
+        
+        response = JsonResponse(errorMessages)
+
+        if len(errorMessages) == 0:
+            request.session['data'] = {
+                "source" : source,
+                "destination" : destin,
+                "journey_date" : j_date,
+                "journey_time" : j_time,
+                "minima" : str(minima),
+                "maxima" : str(maxima)
+            }
+        else:
+           response.status_code = 403 
+
+        return response
 
     context = {
         "form" : form

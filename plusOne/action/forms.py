@@ -54,18 +54,3 @@ class TripForm(forms.ModelForm):
             "minima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-1 dt-gray', 'autocomplete': 'off'}),
             "maxima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-1 dt-gray', 'autocomplete': 'off'})
         }
-        errorMessages = {
-            "source" : "Invalid! Source cannot be same as Destination!",
-            "journey_time" : "Invalid Time!"
-        }
-
-    def clean_source(self, *args, **kwargs):
-        if self.cleaned_data["destination"] == self.cleaned_data["source"]:
-            raise forms.ValidationError("Invalid! Source cannot be same as Destination!")
-        return self.cleaned_data["source"]
-
-    def clean_journey_time(self, *args, **kwargs):
-        journey_datetime = datetime.datetime.combine(self.cleaned_data["journey_date"], self.cleaned_data["journey_time"])
-        if journey_datetime < timezone.now():
-            raise forms.ValidationError("Invalid Time!")
-        return self.cleaned_data["journey_time"] 
