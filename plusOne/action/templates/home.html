@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container reg-header fin-h text-left pt-5"> Ready to go? </div>
+<div class="container reg-header fin-h text-left pt-4"> Ready to go? </div>
 <div class="container card home-card p-5 mb-5 mt-5 shadow-lg" action="search/">
     <form id="trip" method="POST"> {% csrf_token %}
         <label class="ml-1"> {{ form.source.label }} </label>
@@ -14,30 +14,31 @@
         {{ form.destination }}
         <label class="ml-1" id="date-chooser"> {{ form.journey_date.label }} </label>
         <div class="form-row">
-            <div class="col">
-                <input type="text" class="form-control datetimepicker-input" autocomplete="off" id="datefield" data-toggle="datetimepicker" data-target="#datefield"/>
+            <div class="col-lg">
+                <input type="text" class="form-control dt-gray datetimepicker-input" autocomplete="off" id="datefield" data-toggle="datetimepicker" data-target="#datefield"/>
             </div>
+            <div class="col-md-4"> 
+                <input type="text" class="form-control dt-gray datetimepicker-input" autocomplete="off" id="timefield" data-toggle="datetimepicker" data-target="#timefield"/>
+            </div>
+        </div>
+        <label class="ml-1 pt-3"> I'M FINE WITH STARTING... </label>
+        <div class="form-row">
             <div class="col"> 
-                <input type="text" class="form-control datetimepicker-input" autocomplete="off" id="timefield" data-toggle="datetimepicker" data-target="#timefield"/>
+                {{ form.minima }} 
+                <div class="text-right">
+                    <label class="ml-1 "> MINS BEFORE </label> 
+                </div>
             </div>
-        </div>
-        <div class="form-row pt-3">
-            <p style="color: #b3b3b3;margin-left:10px">I AM WILLING TO START </p>
-        </div>
-        <div class="form-row">
-            <div class="col"> {{ form.minima }} </div>
-            <p style="color: #b3b3b3;margin-top:10px;font-size:large"> MINUTES EARLY </p>
-        </div>
-        <div class="form-row">
-            <p style="color: #b3b3b3;margin-left:10px">AND</p>
-        </div>
-        <div class="form-row">
-            <div class="col"> {{ form.maxima }} </div>
-            <p style="color: #b3b3b3;margin-top:10px;font-size:large">MINUTES LATE</p>
+            <label class="p-3"> OR </label>
+            <div class="col">
+                {{ form.maxima }}
+                <div class="text-right">
+                    <label class="ml-1 "> MINS AFTER </label> 
+                </div>
+            </div>
         </div>
         <button id="home-submit" class="btn btn-outline-danger outline-btn p-2 px-4 mt-4" type="button"> GO! </button>
     </form>
-    <br>
 </div>
 <script type="text/javascript">
     $(function () {
@@ -62,10 +63,6 @@
         });
     });
     $('#home-submit').click(function() {
-        console.log($('#timefield').val());
-        console.log($('#datefield').val());
-        console.log($('#id_minima').val());
-        console.log('clicc');
         $.ajax({
             url: "/",
             type: "POST",

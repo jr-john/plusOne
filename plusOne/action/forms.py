@@ -47,12 +47,12 @@ class TripForm(forms.ModelForm):
             "maxima" : "AND"
         }
         widgets = {
-            "source": forms.Select(attrs = {'class': 'form-dd py-3 pl-2 mb-4', 'autocomplete': 'off'}),
-            "destination": forms.Select(attrs = {'class': 'form-dd py-3 pl-2 mb-4', 'autocomplete': 'off'}),
-            "journey_date": forms.DateInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
-            "journey_time": forms.TimeInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
-            "minima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
-            "maxima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'})
+            "source": forms.Select(attrs = {'class': 'form-dd py-3 pl-2 mb-3', 'autocomplete': 'off'}),
+            "destination": forms.Select(attrs = {'class': 'form-dd py-3 pl-2 mb-3', 'autocomplete': 'off'}),
+            "journey_date": forms.DateInput(attrs = {'class': 'form-control py-4 mb-3 dt-gray', 'autocomplete': 'off'}),
+            "journey_time": forms.TimeInput(attrs = {'class': 'form-control py-4 mb-3 dt-gray', 'autocomplete': 'off'}),
+            "minima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-1 dt-gray', 'autocomplete': 'off'}),
+            "maxima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-1 dt-gray', 'autocomplete': 'off'})
         }
         errorMessages = {
             "source" : "Invalid! Source cannot be same as Destination!",

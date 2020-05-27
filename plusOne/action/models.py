@@ -24,8 +24,8 @@ class Trip(models.Model):
     journey_time = models.TimeField(default = def_journey_time)
     is_active = models.BooleanField(default = False)
     owner = models.CharField(max_length = 100, null = True, blank = True)
-    minima = models.IntegerField(default = 10)
-    maxima = models.IntegerField(default = 10)
+    minima = models.IntegerField(default = 30)
+    maxima = models.IntegerField(default = 20)
 
 class Profile(models.Model):
     first_name = models.CharField(max_length = 100, default = '')
