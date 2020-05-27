@@ -109,6 +109,7 @@ def search(request, *args, **kwargs):
                     "is_active" : True,
                     "owner" : trip.owner,
                 })
+            object_list =  sorted(object_list, key = lambda i:abs(int(time_query.strftime("%H%M")) - int(datetime.datetime.strptime(i['journey_time'], "%H:%M").time().strftime("%H%M"))),reverse=False)
     context = {
         "object_list": object_list,
         "populated": len(object_list)
