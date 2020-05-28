@@ -178,11 +178,13 @@ def search(request, *args, **kwargs):
     def func_sort(i): 
         x1 = int(time_query.strftime("%H%M"))
         y2 = int(datetime.datetime.strptime(i['journey_time'], "%H:%M").time().strftime("%H%M"))
-        if int(x1/100) - int(y2/100) == 1:
-            y2=y2+40
-        if int(y2/100) - int(x1/100) == 1:
-            x1=x1+40
-        return abs(x1-y2)
+        d1 = int(x1/100) - int(y2/100)
+        d2 = int(y2/100) - int(x1/100)
+        if d1 >= 1:
+            y2 = y2 + 40*d1
+        if d2 >= 1:
+            x1 = x1 + 40*d2
+        return i['journey_date'],abs(x1-y2)
     object_list =  sorted(object_list, key = func_sort,reverse=False)
     context = {
         "object_list": object_list,
