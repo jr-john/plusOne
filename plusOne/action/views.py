@@ -90,7 +90,6 @@ def activity(request, *args, **kwargs):
                 "journey_time" : trip.journey_time.strftime("%H:%M"),
                 "is_active" : trip.is_active
             })
-    # object_list =  sorted(object_list, key = lambda i : (int(datetime.datetime.strptime(i['journey_date'], "%d/%m/%Y").time().strftime("%Y%m%d")),int(datetime.datetime.strptime(i['journey_time'], "%H:%M").time().strftime("%H%M"))),reverse=False)
     object_list =  sorted(object_list, key = lambda i : (i['journey_date'],i['journey_time']),reverse=False)
     context = {
         'trips': object_list,
@@ -176,7 +175,15 @@ def search(request, *args, **kwargs):
                     "is_active" : True,
                     "owner" : trip.owner,
                 })
-    object_list =  sorted(object_list, key = lambda i:abs(int(time_query.strftime("%H%M")) - int(datetime.datetime.strptime(i['journey_time'], "%H:%M").time().strftime("%H%M"))),reverse=False)
+    def func_sort(i): 
+        x1 = int(time_query.strftime("%H%M"))
+        y2 = int(datetime.datetime.strptime(i['journey_time'], "%H:%M").time().strftime("%H%M"))
+        if int(x1/100) - int(y2/100) == 1:
+            y2=y2+40
+        if int(y2/100) - int(x1/100) == 1:
+            x1=x1+40
+        return abs(x1-y2)
+    object_list =  sorted(object_list, key = func_sort,reverse=False)
     context = {
         "object_list": object_list,
         "populated": len(object_list)
