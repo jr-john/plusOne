@@ -17,7 +17,7 @@ class TripForm(forms.ModelForm):
             "destination": "WHERE TO?",
             "journey_date": "WHEN?",
             "journey_time": "",
-            "minima": "I PREFER TO START BETWEEN",
+            "minima": "I AM WILLING TO START BETWEEN",
             "maxima" : "AND"
         }
         widgets = {
@@ -28,5 +28,3 @@ class TripForm(forms.ModelForm):
             "minima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'}),
             "maxima": forms.NumberInput(attrs = {'class': 'form-control py-4 mb-4 dt-gray', 'autocomplete': 'off'})
         }
-
-        #fix widget

@@ -2,9 +2,6 @@ from django.db import models
 from django.utils import timezone
 from datetime import datetime, timedelta, date
 
-def def_time():
-    return timezone.now().strftime("%H:%M")
-
 def def_journey_time():
     dt = timezone.now() + timedelta(minutes=10)
     return dt.time().strftime("%H:%M")

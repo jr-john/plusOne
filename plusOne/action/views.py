@@ -36,24 +36,35 @@ def home(request, *args, **kwargs):
 @login_required
 def activity(request, *args, **kwargs):
     trips = Trip.objects.filter(owner = request.user.username)
-    objs = [
-        {
-            "id" : trip.id,
-            "source" : TAG_DICT[trip.source],
-            "destination" : TAG_DICT[trip.destination],
-            "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
-            "journey_time" : trip.journey_time.strftime("%H:%M"),
-            "is_active" : trip.is_active
-        } 
-        for trip in trips
-        if datetime.datetime.combine(trip.journey_date, trip.journey_time) >= datetime.datetime.now()
-    ]
-
+    object_list=[]
+    for trip in trips:
+        if datetime.datetime.combine(trip.journey_date, trip.journey_time) < datetime.datetime.now():
+            trip.delete()
+            continue
+        object_list.append(
+            {
+                "id" : trip.id,
+                "source" : TAG_DICT[trip.source],
+                "destination" : TAG_DICT[trip.destination],
+                "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
+                "journey_time" : trip.journey_time.strftime("%H:%M"),
+                "is_active" : trip.is_active
+            })
     context = {
-        'trips': objs,
-        'populated': len(objs)
+        'trips': object_list,
+        'populated': len(object_list)
     }
     return render(request, "activity.html", context)
+
+
+@login_required
+def stop(request, id):
+    trip = Trip.objects.get(id = id)
+    logger.warning('entered stop')
+    logger.warning(trip.is_active)
+    trip.is_active = False
+    trip.save()
+    return redirect("activity")
 
 
 @login_required
@@ -74,7 +85,6 @@ def search(request, *args, **kwargs):
     date_query = search_query.journey_date
     time_query=search_query.journey_time
     min_query = search_query.minima
-    print(min_query)
     max_query = search_query.maxima
     dt_query=datetime.datetime.combine(date_query, time_query)
     dt_query_min = dt_query - datetime.timedelta(minutes = min_query)
@@ -82,29 +92,29 @@ def search(request, *args, **kwargs):
     trips = Trip.objects.filter(
         source=source_query,
         destination=destination_query,
-        journey_time__gte= dt_query_min,
-        journey_time__lte= dt_query_max,
         is_active=True).exclude(owner=request.user.username)
-    object_list = [
-        {
-            "id" : trip.id,
-            "source" : TAG_DICT[trip.source],
-            "destination" : TAG_DICT[trip.destination],
-            "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
-            "journey_time" : trip.journey_time.strftime("%H:%M"),
-            "is_active" : True,
-            "owner" : trip.owner,
-        }
-        for trip in trips
-        if datetime.datetime.combine(trip.journey_date, trip.journey_time) >= datetime.datetime.now()
-    ]
-
+    object_list = []
+    for trip in trips:
+        dt = datetime.datetime.combine(trip.journey_date, trip.journey_time)
+        if dt < datetime.datetime.now():
+            trip.delete()
+            continue
+        if dt >= dt_query_min and dt <= dt_query_max:
+            object_list.append(
+                {
+                    "id" : trip.id,
+                    "source" : TAG_DICT[trip.source],
+                    "destination" : TAG_DICT[trip.destination],
+                    "journey_date" : trip.journey_date.strftime("%d/%m/%Y"),
+                    "journey_time" : trip.journey_time.strftime("%H:%M"),
+                    "is_active" : True,
+                    "owner" : trip.owner,
+                })
     context = {
         "object_list": object_list,
         "populated": len(object_list)
     }
     return render(request, "search.html", context)
-
 
 @login_required
 def add(request, *args, **kwargs):
