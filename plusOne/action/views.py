@@ -23,10 +23,11 @@ TAG_DICT = {
     'college':'IIIT Hyderabad Campus'
 }
 
-# @login_required
+@login_required
 def home(request, *args, **kwargs):
-    # if not request.user.first_name:
-    #    return redirect('/register/')
+    if not request.user.first_name:
+        return redirect('/register/')
+    
     form = TripForm(request.POST or None)
     if request.method == 'POST':
         source = request.POST.get('source')
@@ -73,7 +74,7 @@ def home(request, *args, **kwargs):
     return render(request, "home.html", context)
 
 
-# @login_required
+@login_required
 def activity(request, *args, **kwargs):
     trips = Trip.objects.filter(owner = request.user.username)
     object_list=[]
@@ -97,6 +98,7 @@ def activity(request, *args, **kwargs):
     }
     return render(request, "activity.html", context)
 
+@login_required
 def profile(request, *args, **kwargs):
     print(request.user.first_name)
     context={
@@ -104,7 +106,7 @@ def profile(request, *args, **kwargs):
     }
     return render(request, 'profile.html', context)
 
-# @login_required
+@login_required
 def stop(request, id):
     trip = Trip.objects.get(id = id)
     logger.warning('entered stop')
@@ -113,6 +115,7 @@ def stop(request, id):
     trip.save()
     return redirect("activity")
 
+@login_required
 def edit(request, *args, **kwargs):
     form = EditForm(request.POST or None, instance = request.user)
     if request.method == 'POST':
@@ -141,7 +144,7 @@ def edit(request, *args, **kwargs):
     return render(request, 'edit.html', context)
 
 
-# @login_required
+@login_required
 def search(request, *args, **kwargs):
     search_query = request.session.get('data', {})
     source_query = search_query.get("source")
@@ -192,7 +195,7 @@ def search(request, *args, **kwargs):
     }
     return render(request, "search.html", context)
 
-# @login_required
+@login_required
 def add(request, *args, **kwargs):
     search_query = request.session.get("data", {})
     source_query = search_query.get("source")
@@ -212,7 +215,7 @@ def add(request, *args, **kwargs):
     return redirect("/")
 
 
-# @login_required
+@login_required
 def tripdetails(request, id):
     trip = Trip.objects.get(id = id)
     owner = User.objects.get(username = trip.owner)
